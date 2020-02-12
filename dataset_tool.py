@@ -297,7 +297,7 @@ def create_from_images(tfrecord_dir, image_dir, shuffle, add_condition):
     print("ADD CONDITION ", add_condition)
     print('Loading images from "%s"' % image_dir)
 
-    all_data = unpickle('../data/mypickle.pickle')
+    all_data = unpickle(os.path.join(image_dir, "metadata.pkl"))
     image_filenames_temp = all_data["Filenames"]
     conditions_all = all_data["Labels"] #for others use Clusters
     assert len(conditions_all) == len(image_filenames_temp)
@@ -309,7 +309,7 @@ def create_from_images(tfrecord_dir, image_dir, shuffle, add_condition):
     if len(image_filenames_temp) == 0:
         error('No input images found')
 
-    img = np.asarray(PIL.Image.open(image_dir + df['Filenames'][0]))
+    img = np.asarray(PIL.Image.open(os.path.join(image_dir, df['Filenames'][0])))
     resolution = img.shape[0]
     channels = img.shape[2] if img.ndim == 3 else 1
     if img.shape[1] != resolution:
@@ -323,7 +323,7 @@ def create_from_images(tfrecord_dir, image_dir, shuffle, add_condition):
     drop = []
     df_copy = df.copy()
     for i in range(len(df["Filenames"])):
-        img = np.asarray(PIL.Image.open(image_dir + df["Filenames"].iloc[i]))
+        img = np.asarray(PIL.Image.open(os.path.join(image_dir, df["Filenames"].iloc[i])))
         if channels == 1:
             img = img[np.newaxis, :, :] # HW => CHW
         else:
@@ -346,7 +346,7 @@ def create_from_images(tfrecord_dir, image_dir, shuffle, add_condition):
         deleted = []
         for idx in range(order.size):
             print("HERE ",df["Filenames"].iloc[order[idx]])
-            img = np.asarray(PIL.Image.open(image_dir + df["Filenames"].iloc[order[idx]]))
+            img = np.asarray(PIL.Image.open(os.path.join(image_dir, df["Filenames"].iloc[order[idx]])))
             if channels == 1:
                 img = img[np.newaxis, :, :] # HW => CHW
             else:
