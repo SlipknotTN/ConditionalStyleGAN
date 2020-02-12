@@ -1,4 +1,4 @@
 .idea
 *.pyc
-results
-dataset
+results/
+dataset/

@@ -105,9 +105,6 @@ For this paper we removed all text-based images from the [LLD-logo dataset](http
  | &boxvr;&nbsp; ```train.py``` | Main entry point for training
 
 
-
-
-
 ## Data Preparation
 The ```dataset_tool.py``` script is responsible for turning your data into Tensorflow record files. However, each image in the data set must have the <u>exact</u> same format in terms of size, extension, colour space and bit depth. Any irregular images will automatically be kicked from the data set.
 
@@ -119,8 +116,9 @@ The script takes a pickled dictionary as input with the following format:
 # Pickle path = '../data/mypickle.pickle'
 mypickle = {"Filenames": list_of_file_paths, "Labels": class_condition_labels}
 ```
+Create pickle file using create_dataset_pkl.py and save pkl inside images root directory
 
-The script is run from the terminal and takes the paths to your images and the path of your TF-record directory as flags
+Then run this script from the terminal and takes the paths to your images and the path of your TF-record directory as flags
 
 ```
 python dataset_tool.py create_from_images dataset/logos ../data/my_images
