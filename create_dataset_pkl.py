@@ -9,7 +9,7 @@ import pickle
 
 
 def do_parsing():
-    parser = argparse.ArgumentParser(description='Create OpenPose prepare_paf step from PyTorch model to ')
+    parser = argparse.ArgumentParser(description='Create dataset metadata in pickle format')
     parser.add_argument('--images_root_dir', type=str, required=True,
                         help='Images root directory, subdirectories must be related to classes')
     parser.add_argument('--pkl_filepath', type=str, required=True,
